@@ -1,7 +1,8 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-![Uploading image.png…]()
+![image](https://github.com/Ali-zain-javed/product-listing-app/assets/20820955/869ce0d9-b429-4c30-ada5-e87fb8e0c707)
+
 
 ## Available Scripts
 
