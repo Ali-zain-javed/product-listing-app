@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import "./styles/ProductList.css";
+import "../styles/ProductList.css";
 
 export interface Product {
   id: number;
