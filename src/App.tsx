@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { getProducts } from "./services/productService";
 import ProductList, { Product, CartItem } from "./components/ProductList";
 import FilterOptions from "./components/FilterOptions";
+import "./App.css";
 
 const App: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
