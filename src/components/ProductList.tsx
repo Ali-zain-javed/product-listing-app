@@ -61,7 +61,12 @@ const ProductList: React.FC<Props> = ({
               <div className="product-qty">
                 Qty: {cartItem ? cartItem.qty : 0}
                 {cartItem && cartItem.qty && (
-                  <p className="remove" onClick={() => onRemove(product.id)}>
+                  <p
+                    className="remove"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onRemove(product.id);
+                    }}>
                     Remove
                   </p>
                 )}
@@ -69,7 +74,11 @@ const ProductList: React.FC<Props> = ({
               <button
                 data-testid={`product-1-increment-button_` + product.id}
                 className="product-btn"
-                onClick={() => onIncrement(product.id)}>
+                onClick={(e) => {
+                  onIncrement(product.id);
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}>
                 +
               </button>
             </div>

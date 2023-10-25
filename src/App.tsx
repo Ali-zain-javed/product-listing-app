@@ -32,49 +32,49 @@ const App: React.FC = () => {
     [products, setFilteredProducts]
   );
 
+  //handeling increment on + Button click
   const handleIncrement = useCallback(
     (productId: number) => {
-      setCartItems((prevCart) => {
-        const updatedCart = [...prevCart];
-        const itemIndex = updatedCart.findIndex(
-          (item: CartItem) => item.id === productId
+      const updatedCart = ((cartItems as CartItem[]) ?? []).slice();
+      const itemIndex = updatedCart.findIndex(
+        (item: CartItem) => item.id === productId
+      );
+      if (itemIndex >= 0) {
+        updatedCart[itemIndex].qty = updatedCart[itemIndex].qty + 1;
+      } else {
+        let findItem = products.find(
+          (product: Product) => product.id === productId
         );
-        if (itemIndex >= 0) {
-          updatedCart[itemIndex].qty++;
-        } else {
-          let findItem = products.find(
-            (product: Product) => product.id === productId
-          );
-          if (findItem) {
-            let NewItem = {
-              id: findItem.id,
-              name: findItem.name,
-              price: findItem.price,
-              qty: 1,
-            };
-            updatedCart.push(NewItem);
-          }
+        if (findItem) {
+          let NewItem = {
+            id: findItem.id,
+            name: findItem.name,
+            price: findItem.price,
+            qty: 1,
+          };
+          updatedCart.push(NewItem);
         }
-        return updatedCart;
-      });
+      }
+
+      setCartItems(updatedCart);
     },
-    [setCartItems, products]
+    [cartItems, products]
   );
 
   const handleDecrement = useCallback(
     (productId: number) => {
-      setCartItems((prevCart) => {
-        const updatedCart = [...prevCart];
-        const itemIndex = updatedCart.findIndex(
-          (item) => item.id === productId
-        );
-        if (itemIndex >= 0 && updatedCart[itemIndex].qty > 0) {
-          updatedCart[itemIndex].qty--;
+      const updatedCart = [...cartItems];
+      const itemIndex = updatedCart.findIndex((item) => item.id === productId);
+      if (itemIndex >= 0) {
+        if (updatedCart[itemIndex].qty > 1) {
+          updatedCart[itemIndex].qty = updatedCart[itemIndex].qty - 1;
+        } else {
+          updatedCart.splice(itemIndex, 1);
         }
-        return updatedCart;
-      });
+      }
+      setCartItems(updatedCart);
     },
-    [setCartItems]
+    [cartItems]
   );
 
   const handleRemoveFromCart = useCallback(

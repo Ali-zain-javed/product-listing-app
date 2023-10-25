@@ -13,6 +13,5 @@ export interface Product {
 
 export const getProducts = async (): Promise<Product[]> => {
   const response = await axios.get(API_URL);
-  console.log("response", response?.data);
   return response?.data;
 };
